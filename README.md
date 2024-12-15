@@ -37,6 +37,10 @@ Type 1 Diabetes (T1D) is a T-cell mediated disease with a strong immunogenetic H
 - Resource: [cdr3-QTL](https://github.com/immunogenomics/cdr3-QTL/tree/main)  
 - Additional results and codes are provided in this repository.
 
+### **HLA heterozygosity restricts TCR repertoire**  
+- Tool: [IGoR](https://github.com/qmarcou/IGoR), [SONIA](https://github.com/statbiophys/SONIA)
+- Code is provided in this repository, requires installation of above tools.
+
 ### **Statistical Classification Using Public Clones**  
 - Tool: [ImmuneML](https://github.com/uio-bmi/immuneML)  
 - YAML configuration files are included in the **code section**.
