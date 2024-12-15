@@ -1,0 +1,116 @@
+definitions:
+  datasets:
+    t1d_dataset:
+      format: ImmuneML
+      params:
+        metadata_file: metadata.csv
+        path: t1d_dataset.iml_dataset ## formatted to ImmuneML format for faster calculation. read documentation for more detail. 
+        result_path: ./
+  encodings:
+    enc000001:
+      CompAIRRSequenceAbundance:
+        compairr_path: #path to compairr installation
+        p_value_threshold: 1.0e-06
+        sequence_batch_size: 100000
+    enc00001:
+      CompAIRRSequenceAbundance:
+        compairr_path: #path to compairr installation
+        p_value_threshold: 1.0e-05
+        sequence_batch_size: 100000
+    enc0001:
+      CompAIRRSequenceAbundance:
+        compairr_path: #path to compairr installation
+        p_value_threshold: 0.0001
+        sequence_batch_size: 100000
+    enc001:
+      CompAIRRSequenceAbundance:
+        compairr_path: #path to compairr installation
+        p_value_threshold: 0.001
+        sequence_batch_size: 100000
+  ml_methods:
+    ml:
+      ProbabilisticBinaryClassifier:
+        max_iterations: 50000
+        update_rate: 0.01
+      model_selection_cv: false
+      model_selection_n_folds: -1
+  motifs: {}
+  preprocessing_sequences: {}
+  reports:
+    enc_data:
+      DesignMatrixExporter:
+        file_format: csv
+        name: enc_data
+    feature_performance_plot:
+      CVFeaturePerformance:
+        feature: p_value_threshold
+        is_feature_axis_categorical: false
+        name: feature_performance_plot
+    relevant_sequences:
+      RelevantSequenceExporter:
+        name: relevant_sequences
+    sequence_association_likelihood:
+      SequenceAssociationLikelihood:
+        name: sequence_association_likelihood
+    sequence_overlap:
+      DiseaseAssociatedSequenceCVOverlap:
+        compare_in_assessment: true
+        compare_in_selection: true
+        name: sequence_overlap
+  signals: {}
+  simulations: {}
+instructions:
+  cmv_study_reproduction:
+    assessment:
+      manual_config:
+        test_metadata_path: cohort2_3.csv
+        train_metadata_path: cohort1.csv
+      reports:
+        encoding:
+        - enc_data
+        - relevant_sequences
+        models:
+        - sequence_association_likelihood
+      split_count: 1
+      split_strategy: manual
+      training_percentage: 0.7
+    dataset: t1d_dataset
+    labels:
+    - ML_class:
+        positive_class: T1D
+    metrics:
+    - precision
+    - recall
+    - balanced_accuracy
+    - auc
+    number_of_processes: 60
+    optimization_metric: log_loss
+    refit_optimal_model: false
+    reports:
+    - feature_performance_plot
+    - sequence_overlap
+    selection:
+      reports:
+        encoding:
+        - enc_data
+        - relevant_sequences
+      split_count: 5
+      split_strategy: k_fold
+      training_percentage: 0.7
+    settings:
+    - encoding: enc001
+      ml_method: ml
+      preprocessing: null
+    - encoding: enc0001
+      ml_method: ml
+      preprocessing: null
+    - encoding: enc00001
+      ml_method: ml
+      preprocessing: null
+    - encoding: enc000001
+      ml_method: ml
+      preprocessing: null
+    strategy: GridSearch
+    type: TrainMLModel
+output:
+  format: HTML
