@@ -49,7 +49,8 @@ Type 1 Diabetes (T1D) is a T-cell mediated disease with a strong immunogenetic H
 - Complete code for **K-mer classification** is provided here.
 
 ### **Deep Learning Classification with DeepRC**  
-- Tool: [DeepRC](https://github.com/ml-jku/DeepRC)  
+- Tool: [DeepRC](https://github.com/ml-jku/DeepRC)
+- T1D dataset is currently being used in a compitition, the repository of the DeepRC code optimized for the T1D dataset will be made public once we conclude the compitition. 
 
 ### **Quantitative Trait Locus (QTL) Analysis**  
 - Outputs of the QTL analysis are included in the **data folder**.
